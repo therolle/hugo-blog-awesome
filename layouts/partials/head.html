@@ -44,7 +44,7 @@
 
     {{/* Google analytics script. See hugo.toml to enable/disable this. */}}
     {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
-    {{ with .Site.GoogleAnalytics }}
+    {{ with .Site.Params.googleAnalytics }}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
