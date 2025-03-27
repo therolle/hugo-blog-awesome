@@ -44,8 +44,16 @@
 
     {{/* Google analytics script. See hugo.toml to enable/disable this. */}}
     {{- if hugo.IsProduction | or (eq site.Params.env "production") }}
-    {{ template "_internal/google_analytics.html" . }}
-    {{- end -}}
+    {{ with .Site.GoogleAnalytics }}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ . }}');
+      </script>
+    {{ end }}
+    {{- end }}
 
     {{/* Extend head with user supplied partial */}}
     {{ if templates.Exists "partials/custom-head.html" }}
